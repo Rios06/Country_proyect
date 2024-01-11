@@ -43,6 +43,8 @@ function App() {
               <li>Name: {country.name}</li>
               <li>Capital: {country.capital}</li>
               <li>Continent: {country.continent && country.continent.name}</li>
+              <li>Currency: {country.currency}</li>
+              <li>Languages: {country.languages && country.languages.map(lang => lang.name).join(', ')}</li>
             </ul>
           </article>
         )}
