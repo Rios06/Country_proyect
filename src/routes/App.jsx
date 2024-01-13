@@ -1,22 +1,28 @@
+// App.js
 
 import { useState } from "react";
-import { useCountryData } from "../services/useCountryData";
+import useCountryData from "../services/useCountryData";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import "../styles/App.css";
-
 import videoz from "../assets/planeta.mp4";
 
-function App() {
+const App = () => {
   const { country, setCode } = useCountryData();
-
   const [inputValue, setInputValue] = useState("");
 
   const handleClick = () => {
     setCode(inputValue.toUpperCase());
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleClick();
+    }
+  };
+
   const handleChange = (e) => {
     setInputValue(e.target.value);
-
   };
 
   return (
@@ -26,18 +32,21 @@ function App() {
         Your browser does not support the video tag.
       </video>
       <div className="content">
-        <h1>Search country by code</h1>
-        <input
-          id="searchCountry"
-          type="text"
-          onBlur={handleChange}
-          maxLength={2}
-        />
-        <br />
-        <button onClick={() => handleClick()}>Search country</button>
-        {country == null ? (
-          <p>There is no country with that code</p>
-        ) : (
+        <h1>Countries around the world</h1>
+        <div className="search-container">
+          <div className="search-bar">
+            <FontAwesomeIcon icon={faSearch} id="searchCountryIcon" />
+            <input
+              type="text"
+              onChange={handleChange}
+              onKeyDown={handleKeyPress}
+              maxLength={2}
+              placeholder="Search country by code"
+            />
+          </div>
+          <button onClick={handleClick}>Search country</button>
+        </div>
+        {country && Object.keys(country).length > 0 && (
           <article>
             <ul id="dataCountry">
               <li>Code: {country.code}</li>
@@ -49,10 +58,13 @@ function App() {
             </ul>
           </article>
         )}
+        {!country && inputValue && (
+          <p>There is no country with that code</p>
+        )}
       </div>
     </div>
   );
-}
+};
 
 export default App;
 
