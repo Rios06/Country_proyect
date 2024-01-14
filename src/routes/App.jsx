@@ -1,4 +1,3 @@
-// App.js
 
 import { useState } from "react";
 import useCountryData from "../services/useCountryData";
