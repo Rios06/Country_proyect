@@ -1,7 +1,6 @@
-
 import { useState, useEffect } from "react";
 
-const useCountryData = () => {
+export const useCountryData = () => {
   const [country, setCountry] = useState({});
   const [code, setCode] = useState("");
   const [isFetching, setIsFetching] = useState(false);

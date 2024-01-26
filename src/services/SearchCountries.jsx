@@ -1,13 +1,11 @@
-// App.js
 
-import { useState } from "react";
-import useCountryData from "../services/useCountryData";
+//BUSCAR PAIS
+import { useState } from 'react';
+import useCountryData from './useCountryData';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import "../styles/App.css";
-import videoz from "../assets/planeta.mp4";
 
-const App = () => {
+export const SearchCountries = () => {
   const { country, setCode } = useCountryData();
   const [inputValue, setInputValue] = useState("");
 
@@ -27,10 +25,6 @@ const App = () => {
 
   return (
     <div className="app-container">
-      <video id="videoBackground" autoPlay loop muted>
-        <source src={videoz} type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
       <div className="content">
         <h1>Countries around the world</h1>
         <div className="search-container">
@@ -66,7 +60,4 @@ const App = () => {
   );
 };
 
-export default App;
-
-
-
+export default SearchCountries;
